@@ -17,15 +17,17 @@ export default function Sidebar({ active, onChange, onCompose }: Props) {
     <aside className="w-64 shrink-0 bg-[#eff2e5] border-r border-[#130e30]/10 min-h-screen flex flex-col p-6">
       {/* Brand Lockup */}
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-full bg-[#130e30] text-[#ffe228] flex items-center justify-center text-sm font-bold shadow-sm shrink-0">
-          ✉
-        </div>
+        <img
+          src="/favicon.png"
+          alt="Sendora"
+          className="w-10 h-10 rounded-2xl object-cover shadow-sm shrink-0 border border-[#130e30]/10"
+        />
         <div>
-          <div className="font-serif font-bold text-lg text-deep-ink">
+          <div className="font-serif font-bold text-lg text-deep-ink leading-tight">
             Sendora
           </div>
-          <div className="text-[11px] text-slate font-medium -mt-0.5">
-            Email Scheduler
+          <div className="text-[10px] uppercase font-bold tracking-wider text-slate -mt-0.5">
+            Reach Inbox Scheduler
           </div>
         </div>
       </div>

@@ -46,9 +46,11 @@ export default function EmailDetailModal({ emailId, onClose }: Props) {
         {/* Modal Header */}
         <div className="flex items-center justify-between px-8 py-5 border-b border-[#130e30]/10 bg-[#eff2e5] shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-pill bg-[#130e30] text-[#ffe228] flex items-center justify-center text-sm font-bold shadow-sm">
-              ✉
-            </div>
+            <img
+              src="/favicon.png"
+              alt="Sendora"
+              className="w-10 h-10 rounded-2xl object-cover shadow-sm border border-[#130e30]/10 shrink-0"
+            />
             <div>
               <div className="small-caps-label text-slate mb-0.5">Email Job Details</div>
               <h2 className="text-xl font-serif font-bold text-deep-ink">

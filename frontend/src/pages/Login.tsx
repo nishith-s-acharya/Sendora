@@ -26,15 +26,17 @@ export default function Login() {
         <div className="card-meadow p-8 md:p-10 border border-[#130e30]/10 shadow-[0_4px_32px_rgba(19,14,48,0.04)] !rounded-[36px]">
           {/* Brand Header */}
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-[#130e30] text-[#ffe228] flex items-center justify-center text-base font-bold shadow-sm">
-              ✉
-            </div>
+            <img
+              src="/favicon.png"
+              alt="Sendora"
+              className="w-11 h-11 rounded-2xl object-cover shadow-sm border border-[#130e30]/10"
+            />
             <div>
-              <div className="text-lg font-serif font-bold text-deep-ink">
+              <div className="text-xl font-serif font-bold text-deep-ink leading-tight">
                 Sendora
               </div>
-              <div className="text-xs text-slate -mt-0.5">
-                Email Job Scheduler
+              <div className="text-[10px] uppercase font-bold tracking-wider text-slate -mt-0.5">
+                Reach Inbox Scheduler
               </div>
             </div>
           </div>

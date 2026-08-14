@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sendora — Video Presentation Teleprompter Script</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hedvig+Letters+Serif:opsz@12..24&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --bg: #f9fbf2;
+      --card-bg: #eff2e5;
+      --ink: #130e30;
+      --yellow: #ffe228;
+      --green: #59e25d;
+      --slate: #5f5c6e;
+      --border: rgba(19, 14, 48, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px;
+      box-shadow: 0 10px 40px rgba(19, 14, 48, 0.05);
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-title {
+      font-family: 'Hedvig Letters Serif', Georgia, serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    .print-btn {
+      background: var(--ink);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .print-btn:hover { opacity: 0.9; }
+
+    .scene-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      margin-bottom: 28px;
+      page-break-inside: avoid;
+    }
+
+    .scene-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .scene-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .scene-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(19, 14, 48, 0.08);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .action-box {
+      background: #ffffff;
+      border-left: 4px solid var(--ink);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--slate);
+    }
+    .action-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .speech-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 22px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink);
+      position: relative;
+    }
+    .speech-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0b69a3;
+      margin-bottom: 6px;
+    }
+
+    .speech-box em {
+      font-weight: 600;
+      font-style: normal;
+      color: #000000;
+    }
+
+    .checklist-box {
+      background: #f4f6ec;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 32px;
+      font-size: 13px;
+    }
+
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
+      .print-btn { display: none; }
+      .scene-card { border: 1px solid #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <span class="badge">Presentation Script</span>
+        <h1 class="brand-title" style="margin-top: 8px;">Sendora Demo Video Teleprompter</h1>
+        <div style="font-size: 13px; color: var(--slate); margin-top: 4px;">Target Duration: 3:30 – 4:00 Mins &bull; Speaker: Nishith S Acharya</div>
+      </div>
+      <button class="print-btn" onclick="window.print()">
+        🖨️ Save as PDF / Print
+      </button>
+    </header>
+
+    <!-- SCENE 1 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">1. Introduction & Architecture Overview</div>
+        <div class="scene-time">0:00 – 0:45</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Show Sendora Login page at <code>https://sendora-frontend.onrender.com</code> &rarr; Click "Continue with Google" &rarr; Lands on Dashboard.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "Hello everyone! My name is <em>Nishith S Acharya</em>, and today I am excited to present <em>Sendora</em> — a production-grade, distributed email job scheduler service and real-time monitoring dashboard.<br><br>
+        Our tech stack is built entirely on <em>TypeScript</em> across both ends: Express.js, Prisma ORM, PostgreSQL, and BullMQ powered by Redis on the backend; React 18, Tailwind CSS, and Vite on the frontend.<br><br>
+        Crucially, Sendora uses <em>zero OS-level or node-cron jobs</em>. Cron jobs cannot guarantee millisecond accuracy across distributed nodes. Instead, Sendora leverages <em>BullMQ delayed sorted sets in Redis</em> combined with <em>PostgreSQL as the durable source of truth</em> and <em>Redis atomic sliding-window rate limiters</em>."
+      </div>
+    </div>
+
+    <!-- SCENE 2 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">2. Campaign Scheduling & Rate Limiting</div>
+        <div class="scene-time">0:45 – 1:45</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Click <strong>+ Compose Email</strong> &rarr; Fill Subject & Body &rarr; Drag <code>sample-recipients.csv</code> &rarr; Highlight <code>✓ 5 valid emails</code> &rarr; Set Start Time (1 min ahead), Delay (2s), Hourly Limit (100) &rarr; Click Schedule.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "Let's schedule a multi-recipient outreach campaign to see the scheduling engine in action.<br><br>
+        I'll click <em>Compose Email</em>, enter our subject and body, and upload our recipient list via CSV. Notice that Sendora's universal file parser instantly validates all email addresses and displays live recipient badges for all 5 contacts.<br><br>
+        Next, we configure our dispatch parameters: a scheduled <em>Start Time</em>, a <em>2-second delay</em> between individual sends to prevent sudden burst spikes, and an <em>hourly limit of 100 emails per sender</em>.<br><br>
+        When I click <em>Schedule Email</em>, the backend atomically saves the batch to PostgreSQL, computes the delayed offsets, and enqueues individual delayed jobs into BullMQ."
+      </div>
+    </div>
+
+    <!-- SCENE 3 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">3. Live Queue & Real-Time Sent Delivery Log</div>
+        <div class="scene-time">1:45 – 2:35</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Open <strong>Scheduled Emails</strong> tab (show 5 jobs with yellow SCHEDULED pills and 2s timestamps) &rarr; Switch to <strong>Sent Emails</strong> tab (show rows turning green ● SENT every 2s) &rarr; Click row to open Email Detail Drawer.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "Here in the <em>Scheduled Emails</em> queue, you can see all 5 recipient jobs lined up with their target dispatch times, precisely staggered 2 seconds apart.<br><br>
+        When the start time arrives, the BullMQ worker picks up each job atomically, reserves a rate-limit slot in Redis, and dispatches the email via our isolated Ethereal SMTP sandbox.<br><br>
+        Switching over to the <em>Sent Emails</em> delivery log, you can see the jobs completing one-by-one in real time with green <em>SENT</em> badges.<br><br>
+        We can click on any delivered row to open the <em>Email Detail Inspector Drawer</em>, reviewing the full email message body, recipient address, sender channel, and unique Job UUID."
+      </div>
+    </div>
+
+    <!-- SCENE 4 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">4. Fault Tolerance & Server Restart Resilience</div>
+        <div class="scene-time">2:35 – 3:20</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Schedule an email for 45s in future &rarr; In terminal kill the server process (<code>Ctrl+C</code>) &rarr; Restart server/worker (<code>npm run dev</code>) &rarr; Show that the scheduled job resumes and delivers with zero loss or duplicates.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "Now let's demonstrate <em>Fault Tolerance & Restart Resilience</em>. A critical requirement for any production scheduler is that jobs must survive unexpected server crashes without being lost or duplicated.<br><br>
+        I have scheduled an email to send 45 seconds from now. Now, I will simulate an unexpected server crash by killing the process right here in the terminal.<br><br>
+        The server is down. Now, let's start the process back up.<br><br>
+        Upon boot, Sendora's <em>Startup Reconciliation Engine</em> automatically scans PostgreSQL for any pending or stuck jobs and safely re-enqueues them into Redis. As you can see, the job executed on time with <em>zero lost jobs and zero duplicate deliveries</em>."
+      </div>
+    </div>
+
+    <!-- SCENE 5 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">5. Database Verification in TablePlus</div>
+        <div class="scene-time">3:20 – 3:55</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Switch to TablePlus &rarr; Open <code>EmailJob</code> table &rarr; Point out rows with status <code>SENT</code> and populated <code>sentAt</code> timestamps.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "Let's verify the persistent state in our database using <em>TablePlus</em>.<br><br>
+        In our PostgreSQL schema, we have four core relational models: <code>User</code>, <code>Sender</code>, <code>EmailBatch</code>, and <code>EmailJob</code>.<br><br>
+        Looking at the <em>EmailJob</em> table, we can verify that every single recipient is recorded with its full subject, body, target time, and upon completion, its status is updated to <em>SENT</em> with the exact <em>sentAt</em> timestamp.<br><br>
+        This guarantees that even if Redis cache is flushed, PostgreSQL maintains an immutable historical ledger of all outreach activities."
+      </div>
+    </div>
+
+    <!-- SCENE 6 -->
+    <div class="scene-card">
+      <div class="scene-header">
+        <div class="scene-title">6. Conclusion & Wrap-Up</div>
+        <div class="scene-time">3:55 – 4:15</div>
+      </div>
+      <div class="action-box">
+        <div class="action-label">🖥️ What to show on screen</div>
+        Switch back to Sendora Dashboard showing the Overview Activity Chart and stat cards.
+      </div>
+      <div class="speech-box">
+        <div class="speech-label">🗣️ What to say word-for-word</div>
+        "To summarize: Sendora provides an enterprise-ready, fault-tolerant email scheduling platform featuring millisecond-accurate BullMQ delayed sets, atomic Redis rate limiting, crash resilience with startup reconciliation, and a modern React dashboard.<br><br>
+        The project is fully containerized with Docker, deployed live on the cloud, and the source code is available on GitHub.<br><br>
+        Thank you very much for your time and consideration!"
+      </div>
+    </div>
+
+    <div class="checklist-box">
+      <h3 style="margin-bottom: 8px; font-weight: 700;">📋 Submission Checklist Reminder</h3>
+      <ul style="padding-left: 20px; line-height: 1.8;">
+        <li>GitHub Repo: <code>https://github.com/nishith-s-acharya/Sendora</code></li>
+        <li>Live Website: <code>https://sendora-frontend.onrender.com</code></li>
+        <li>Evaluators Invited: <code>Mitrajit</code>, <code>Yadav036</code></li>
+        <li>Video Link: Upload unlisted to YouTube / Google Drive</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>
