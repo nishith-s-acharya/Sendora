@@ -11,13 +11,19 @@ import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
 
-app.use(cors({ origin: env.FRONTEND_URL, credentials: true }));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "2mb" }));
 app.use(pinoHttp({ logger }));
 
-app.get("/health", (_req, res) => res.json({ ok: true }));
+app.get("/health", (_req, res) => res.json({ ok: true, timestamp: new Date().toISOString() }));
 
 app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/emails", emailRouter);
 app.use("/api/senders", senderRouter);
 
