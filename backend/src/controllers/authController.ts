@@ -26,19 +26,21 @@ export async function googleLogin(req: Request, res: Response) {
     return res.status(400).json({ error: "credential is required" });
   }
 
+  const clientId = (env.GOOGLE_CLIENT_ID || "469346149423-m3ro8jgol9btbjd7eeq97j6gdme7mqd4.apps.googleusercontent.com").trim();
+
   let payload;
   try {
     const ticket = await googleClient.verifyIdToken({
       idToken: parsed.data.credential,
-      audience: env.GOOGLE_CLIENT_ID,
+      audience: [clientId, "469346149423-m3ro8jgol9btbjd7eeq97j6gdme7mqd4.apps.googleusercontent.com"],
     });
     payload = ticket.getPayload();
-  } catch {
-    return res.status(401).json({ error: "Invalid Google credential" });
+  } catch (err: any) {
+    return res.status(401).json({ error: `Google verification error: ${err?.message || "Invalid token"}` });
   }
 
   if (!payload?.sub || !payload.email) {
-    return res.status(401).json({ error: "Invalid Google credential" });
+    return res.status(401).json({ error: "Google profile email missing from token" });
   }
 
   const user = await prisma.user.upsert({

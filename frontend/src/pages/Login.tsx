@@ -59,8 +59,12 @@ export default function Login() {
                 onSuccess={(res) => {
                   setError(null);
                   if (res.credential) {
-                    loginWithGoogleCredential(res.credential).catch(() =>
-                      setError("Authentication failed. Please try again.")
+                    loginWithGoogleCredential(res.credential).catch((err: any) =>
+                      setError(
+                        err?.response?.data?.error ||
+                        err?.message ||
+                        "Authentication failed. Please try again."
+                      )
                     );
                   }
                 }}
