@@ -8,6 +8,7 @@ import { authRouter } from "./routes/auth";
 import { emailRouter } from "./routes/email";
 import { senderRouter } from "./routes/sender";
 import { errorHandler } from "./middleware/errorHandler";
+import "./queue/emailWorker";
 
 const app = express();
 
