@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum JobStatus {
+  SCHEDULED
+  QUEUED
+  PROCESSING
+  SENT
+  FAILED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  googleId  String   @unique
+  name      String
+  email     String   @unique
+  avatar    String?
+  createdAt DateTime @default(now())
+
+  senders Sender[]
+}
+
+// A "Sender" is an Ethereal SMTP identity used to send mail on behalf of a user.
+// Multiple senders let the scheduler demonstrate per-sender rate limiting.
+model Sender {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  label      String // friendly name, e.g. "Default sender"
+  email      String
+  smtpHost   String   @default("smtp.ethereal.email")
+  smtpPort   Int      @default(587)
+  username   String
+  password   String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  jobs EmailJob[]
+
+  @@index([userId])
+}
+
+// One row per campaign/compose action. Groups many EmailJob rows together
+// so the dashboard can show aggregate progress for a batch send.
+model EmailBatch {
+  id                  String   @id @default(uuid())
+  userId              String
+  subject             String
+  body                String
+  startTime            DateTime
+  delaySeconds        Int
+  hourlyLimit         Int
+  totalRecipients     Int
+  createdAt           DateTime @default(now())
+
+  jobs EmailJob[]
+}
+
+model EmailJob {
+  id            String     @id @default(uuid())
+  batchId       String
+  batch         EmailBatch @relation(fields: [batchId], references: [id])
+  senderId      String
+  sender        Sender     @relation(fields: [senderId], references: [id])
+  recipient     String
+  subject       String
+  body          String
+  scheduledAt   DateTime
+  sentAt        DateTime?
+  status        JobStatus  @default(SCHEDULED)
+  delaySeconds  Int
+  hourlyLimit   Int
+  bullJobId     String?    @unique
+  retryCount    Int        @default(0)
+  errorMessage  String?
+  createdAt     DateTime   @default(now())
+
+  @@index([batchId])
+  @@index([senderId])
+  @@index([status])
+  @@index([scheduledAt])
+}

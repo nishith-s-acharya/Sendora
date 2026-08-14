@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sendora — Email Job Scheduler Run Guidebook</title>
+  <style>
+    :root {
+      --bg: #f9fbf2;
+      --card-bg: #eff2e5;
+      --text: #130e30;
+      --accent: #ffe228;
+      --slate: #5f5c6e;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1, h2, h3 {
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 36px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(19, 14, 48, 0.15);
+    }
+    pre, code {
+      font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #130e30;
+      color: #f9fbf2;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    p code, li code {
+      background: rgba(19, 14, 48, 0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(19, 14, 48, 0.06);
+    }
+    th {
+      background: var(--card-bg);
+      font-weight: 600;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      margin: 24px 0;
+      border: 1px solid rgba(19, 14, 48, 0.1);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: var(--accent);
+      color: var(--text);
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>📖 ReachInbox Email Job Scheduler — Run Guidebook</h1>
+  <p>A complete handbook for setting up, running, testing, and monitoring the system.</p>
+
+  <div class="card">
+    <span class="badge">QUICK ACCESS</span>
+    <p style="margin-top: 10px; margin-bottom: 0;">
+      <strong>Frontend:</strong> <a href="http://localhost:5173" target="_blank">http://localhost:5173</a><br>
+      <strong>Backend API:</strong> <a href="http://localhost:3001" target="_blank">http://localhost:3001</a>
+    </p>
+  </div>
+
+  <h2>1. Quick Start (3 Terminals)</h2>
+  <pre><code># Terminal 1: Backend API
+cd backend
+npm run dev
+
+# Terminal 2: BullMQ Email Worker
+cd backend
+npm run worker
+
+# Terminal 3: Frontend Dashboard
+cd frontend
+npm run dev</code></pre>
+
+  <h2>2. Infrastructure (Postgres & Redis)</h2>
+  <pre><code># Start with Docker:
+docker compose up -d
+
+# OR Start with Homebrew on macOS:
+brew services start postgresql@16
+brew services start redis</code></pre>
+
+  <h2>3. TablePlus Connection Details</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Connection URL / Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PostgreSQL</strong></td>
+        <td><code>postgres://reachinbox:reachinbox_pass@localhost:5432/reachinbox_db</code></td>
+      </tr>
+      <tr>
+        <td><strong>Redis</strong></td>
+        <td><code>redis://localhost:6379</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Core User Workflow</h2>
+  <ol>
+    <li>Open <strong>http://localhost:5173</strong> and click <strong>"Continue with Google"</strong>.</li>
+    <li>Click <strong>"+ Compose Email"</strong> in the sidebar.</li>
+    <li>Enter Subject, Body, upload a CSV/TXT with recipient emails, set Start Time, Delay, and Hourly Limit.</li>
+    <li>Click <strong>"Schedule Email"</strong>.</li>
+    <li>Watch real-time status updates on the dashboard and click the rendered email preview URLs in the worker console.</li>
+  </ol>
+
+  <h2>5. Command Cheat Sheet</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Command</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Start Infrastructure</td>
+        <td><code>docker compose up -d</code></td>
+      </tr>
+      <tr>
+        <td>Start API Server</td>
+        <td><code>cd backend && npm run dev</code></td>
+      </tr>
+      <tr>
+        <td>Start BullMQ Worker</td>
+        <td><code>cd backend && npm run worker</code></td>
+      </tr>
+      <tr>
+        <td>Start Frontend UI</td>
+        <td><code>cd frontend && npm run dev</code></td>
+      </tr>
+      <tr>
+        <td>Database GUI (Prisma Studio)</td>
+        <td><code>cd backend && npm run prisma:studio</code></td>
+      </tr>
+      <tr>
+        <td>Check Redis Status</td>
+        <td><code>redis-cli ping</code></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
